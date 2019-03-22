@@ -29,9 +29,9 @@
       ],
       "plugins": [
         ["module-resolver", {
-          "root": ["element-ui"],
+          "root": ["element-ui-yh"],
           "alias": {
-            "element-ui/src": "element-ui/lib"
+            "element-ui-yh/src": "element-ui-yh/lib"
           }
         }]
       ]
