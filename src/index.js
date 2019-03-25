@@ -71,6 +71,7 @@ import Main from '../packages/main/index.js';
 import Footer from '../packages/footer/index.js';
 import Timeline from '../packages/timeline/index.js';
 import TimelineItem from '../packages/timeline-item/index.js';
+import Treemenu from '../packages/treemenu/index.js';
 import locale from 'element-ui-yh/src/locale';
 import CollapseTransition from 'element-ui-yh/src/transitions/collapse-transition';
 
@@ -142,7 +143,8 @@ const components = [
   Footer,
   Timeline,
   TimelineItem,
-  CollapseTransition
+  CollapseTransition,
+  Treemenu
 ];
 
 const install = function(Vue, opts = {}) {
@@ -176,7 +178,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 export default {
-  version: '2.6.2',
+  version: '1.0.0',
   locale: locale.use,
   i18n: locale.i18n,
   install,
@@ -251,5 +253,6 @@ export default {
   Main,
   Footer,
   Timeline,
-  TimelineItem
+  TimelineItem,
+  Treemenu
 };
