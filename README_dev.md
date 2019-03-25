@@ -29,3 +29,9 @@ npm run dist
 生成lib目录之后
 
 - 上传npm
+```npm
+npm run login
+npm publish
+```
+再次上传需修改版本号；可以通过npm version <update_type>自动改变版本
+update_type为patch, minor, or major其中之一，分别表示补丁，小改，大改
