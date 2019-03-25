@@ -144,9 +144,9 @@ const components = [
   Footer,
   Timeline,
   TimelineItem,
-  CollapseTransition,
   Treemenu,
-  Backstage
+  Backstage,
+  CollapseTransition
 ];
 
 const install = function(Vue, opts = {}) {
@@ -158,6 +158,7 @@ const install = function(Vue, opts = {}) {
   });
 
   Vue.use(Loading.directive);
+
   Vue.prototype.$ELEMENT = {
     size: opts.size || '',
     zIndex: opts.zIndex || 2000

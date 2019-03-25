@@ -8,7 +8,6 @@
   height:calc(100vh - 70px);
   position: relative;
   overflow:hidden;
-  display: inline-block;
   &.hide-menu{
     .main-menu{
       width: 0;
@@ -94,7 +93,7 @@
   }
 }
 /*主菜单end*/
-/*子菜单样式覆盖start*/
+/*子菜单start*/
 .sub-menu-title{
   padding: 15px;
   font-weight: 700;
@@ -102,10 +101,6 @@
   border-bottom: 1px solid $--border-color-base;
 }
 /*子菜单end*/
-.menu-icon{
-  vertical-align: sub;
-  width: 18px;
-}
 /*子菜单样式*/
 [data-menu_current],
 [data-menu_current]>.el-submenu__title,
@@ -120,4 +115,3 @@
 .el-menu{
   border-right: none;
 }
-/*子菜单样式覆盖end*/

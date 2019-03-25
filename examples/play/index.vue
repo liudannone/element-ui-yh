@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-backstage :logo="logo" :title="title" :menuList="menuList"
+    <el-backstage :headerLogo="headerLogo" :headerSysName="headerSysName" :menuList="menuList"
                   @headerCommand="headerCommand"></el-backstage>
   </div>
 </template>
@@ -9,8 +9,8 @@
   export default {
     data() {
       return {
-        logo: '',
-        title: '运维系统',
+        headerLogo:  '',
+        headerSysName: '运维系统',
         menuList: [
           {
             "id": "1",

@@ -1,6 +1,6 @@
 <template>
   <div class="body-wrap">
-    <BackHeader class="header-wrap" :logo="logo" :title="title"
+    <BackHeader class="header-wrap" :headerLogo="headerLogo" :headerSysName="headerSysName"
                 @headerCommand="headerCommand"></BackHeader>
     <el-container class="main-wrap">
       <el-treemenu :parentMenuList="menuList" @addTab="addTab"
@@ -31,8 +31,8 @@ export default {
     BackHeader
   },
   props: {
-    logo: String,
-    title: String,
+    headerLogo: String,
+    headerSysName: String,
     menuList: Array
   },
   data() {
@@ -84,43 +84,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss">
-  body,html,ul,li,h5{
-    padding: 0;
-    margin: 0;
-  }
-  ul,li{
-   list-style: none;
-  }
-  .relative{
-    position: relative;
-  }
-  .body-wrap{
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    .header-wrap{
-      flex: 0 0 70px;
-    }
-    .main-wrap{
-      flex:1;
-    }
-    .content-wrap{
-      margin: 0 10px;
-    }
-}
-  .tabs-wrap{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    overflow: auto;
-  }
-  .iframe{
-    width: 100%;
-    padding: 0 10px;
-    box-sizing: border-box;
-    height: calc(100vh - 128px);
-  }
-</style>

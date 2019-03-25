@@ -1,11 +1,11 @@
 <template>
   <!--头部横条公用组件-->
   <div class="header">
-    <img :src="logo" alt="logo">
+    <img :src="headerLogo" alt="logo">
     <el-dropdown class="drop-down" @command="dropdownCommand">
       <span class="user-info">
-        你好,{{user.name}}欢迎使用{{title}}！
-       <!-- <img class="user-header" src="../assets/defaultUserHead.png" alt="header-img">-->
+        你好,{{user.name}}欢迎使用{{headerSysName}}！
+        <img v-if="user.picture" class="user-header" :src="user.picture" alt="header-img">
         <i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
@@ -21,8 +21,8 @@
 export default {
   name: 'back-header',
   props: {
-    logo: String,
-    title: String
+    headerLogo: String,
+    headerSysName: String
   },
   data() {
     return {
@@ -45,27 +45,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss">
-.header{
-  height: 70px;
-  background-color: #1d2531;
-  display: flex;
-  position: relative;
-  align-items: center;
-  .drop-down{
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translate(0,-50%);
-    .user-info{
-      color: #fff;
-      font-size: 13px;
-      .user-header{
-        margin-left: 10px;
-        width: 40px;
-      }
-    }
-  }
-}
-</style>

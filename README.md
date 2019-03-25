@@ -1,5 +1,5 @@
 # 简介
-    此项目是在element-ui的源码基础上，根据公司具体的需求和多个业务系统的功能点做了修改和扩展
+    此项目是在element-ui的源码基础上，根据公司具体的需求和多个业务系统的功能点做了修改和扩展，项目地址https://github.com/liudannone/element-ui-yh.git
 
 # 二次开发流程
     参考项目下README_dev.md文件内容
