@@ -72,6 +72,7 @@ import Footer from '../packages/footer/index.js';
 import Timeline from '../packages/timeline/index.js';
 import TimelineItem from '../packages/timeline-item/index.js';
 import Treemenu from '../packages/treemenu/index.js';
+import Backstage from '../packages/backstage/index.js';
 import locale from 'element-ui-yh/src/locale';
 import CollapseTransition from 'element-ui-yh/src/transitions/collapse-transition';
 
@@ -144,7 +145,8 @@ const components = [
   Timeline,
   TimelineItem,
   CollapseTransition,
-  Treemenu
+  Treemenu,
+  Backstage
 ];
 
 
@@ -255,5 +257,6 @@ export default {
   Footer,
   Timeline,
   TimelineItem,
-  Treemenu
+  Treemenu,
+  Backstage,
 };
