@@ -31,15 +31,15 @@ export default {
   methods: {
     dropdownCommand(command) {
       if (command === 'signOut') {
-        signOut();
+
       } else {
         this.$router.replace({
-          path: `/${command}?id=${this.user.id}`,
+          path: `/${command}?id=${this.user.id}`
         });
       }
     },
     initUser() {
-      const user = getStore('userInfo');
+      const user = localStorage.getItem('userInfo');
       if (user) {
         this.user = JSON.parse(user);
       }

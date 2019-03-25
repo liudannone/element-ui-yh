@@ -24,9 +24,9 @@
 import BackHeader from './back-header';
 
 export default {
-  name: 'Backstage',
+  name: 'ElBackstage',
   components: {
-    BackHeader,
+    BackHeader
   },
   data() {
     return {
@@ -40,7 +40,7 @@ export default {
 
   },
   computed: {
-    tabs() {
+    /* tabs() {
       return this.$store.getters.tabs;
     },
     activeTableName() {
@@ -48,7 +48,7 @@ export default {
     },
     isLogin() {
       return this.$store.getters.isLogin;
-    }
+    }*/
   },
   methods: {
     // 删除菜单
@@ -57,15 +57,19 @@ export default {
     },
     // 获取菜单
     getMenus() {
-      $getMenus().then((resp) => {
-        this.menuList = resp;
-      });
     }
   }
 };
 </script>
 
 <style lang="scss">
+  body,html,ul,li,h5{
+    padding: 0;
+    margin: 0;
+  }
+  ul,li{
+   list-style: none;
+  }
   .body-wrap{
     display: flex;
     flex-direction: column;
