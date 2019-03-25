@@ -1,21 +1,23 @@
 <template>
   <div class="body-wrap">
-    <BackHeader class="header-wrap" :logo="logo" :title="title"></BackHeader>
+    <BackHeader class="header-wrap" :logo="logo" :title="title"
+                @headerCommand="headerCommand"></BackHeader>
     <el-container class="main-wrap">
       <el-treemenu :parentMenuList="menuList" @addTab="addTab"
-                   :activeTableName="activeTableName" @getActiveTableName="getActiveTableName"></el-treemenu>
+                   :activeTableName="activeTableName"></el-treemenu>
       <el-container class="relative">
-       <!-- <el-tabs class="tabs-wrap" :value ="activeTableName" type="card"
+        <el-tabs class="tabs-wrap" v-model ="activeTableName" type="card"
                  closable @tab-remove="removeTab">
           <el-tab-pane
             v-for="item in tabs"
             :key="item.name"
             :label="item.title"
             :name="item.name">
-            <iframe class="iframe" :src="item.path"
-                    frameborder="0"></iframe>
+            {{item.name}}
+           <!-- <iframe class="iframe" :src="item.path"
+                    frameborder="0"></iframe>-->
           </el-tab-pane>
-        </el-tabs>-->
+        </el-tabs>
       </el-container>
     </el-container>
   </div>
@@ -60,11 +62,11 @@ export default {
     },
     // 子组件中获取增加菜单弹窗
     addTab(data) {
-      let newTabName = ++this.tabIndex + ''; // eslint-disable-line
+      let newTabName = data.name;
       let flag = true;
       const tabs = this.tabs;
       tabs.forEach((tab) => {
-        if (tab.id === data.id) {
+        if (tab.name === data.name) {
           flag = false;
           newTabName = tab.name;
         }
@@ -77,9 +79,8 @@ export default {
       }
       this.activeTableName = newTabName;
     },
-    // 子组件中获取激活菜单的名称
-    getActiveTableName(targetName) {
-      this.activeTableName = targetName;
+    headerCommand(command) {
+      this.$emit('headerCommand', command);
     }
   }
 };
@@ -92,6 +93,9 @@ export default {
   }
   ul,li{
    list-style: none;
+  }
+  .relative{
+    position: relative;
   }
   .body-wrap{
     display: flex;

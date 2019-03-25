@@ -1,6 +1,7 @@
 <template>
   <div>
-    <el-backstage :logo="logo" :title="title" :menuList="menuList"></el-backstage>
+    <el-backstage :logo="logo" :title="title" :menuList="menuList"
+                  @headerCommand="headerCommand"></el-backstage>
   </div>
 </template>
 
@@ -119,6 +120,20 @@
           },
         ]
       };
+    },
+    methods: {
+      headerCommand(command) {
+        if (command === 'signOut') {
+          localStorage.clear();
+          this.$router.replace({
+            path: '/login'
+          });
+        } else {
+          this.$router.replace({
+            path: `/${command}?id=${this.user.id}`
+          });
+        }
+      }
     }
   };
 </script>

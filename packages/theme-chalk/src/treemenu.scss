@@ -94,7 +94,7 @@
   }
 }
 /*主菜单end*/
-/*子菜单start*/
+/*子菜单样式覆盖start*/
 .sub-menu-title{
   padding: 15px;
   font-weight: 700;
@@ -102,3 +102,22 @@
   border-bottom: 1px solid $--border-color-base;
 }
 /*子菜单end*/
+.menu-icon{
+  vertical-align: sub;
+  width: 18px;
+}
+/*子菜单样式*/
+[data-menu_current],
+[data-menu_current]>.el-submenu__title,
+.el-menu-item:hover,
+.el-submenu__title:hover{
+  background: $--color-primary-light-5!important;
+  color: #fff!important;
+}
+.el-menu-item.is-active{
+  color: #333;
+}
+.el-menu{
+  border-right: none;
+}
+/*子菜单样式覆盖end*/

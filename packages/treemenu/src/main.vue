@@ -25,8 +25,8 @@
         :default-active="currentSubMenus"
         :default-openeds="defaultOpens"
         background-color="#fff"
-        @open="menuOpen"
-        @select="menuSelect"
+        @open="menuEvent"
+        @select="menuEvent"
         text-color="#333">
         <MenuCommon :menuList="subMenus" :activeMenuId="currentSubMenus"></MenuCommon>
       </el-menu>
@@ -55,7 +55,7 @@ export default {
       mainMenus: [], // 一级菜单
       currentMainMenus: 0, // 一级菜单当前index
       subMenus: [], // 二级菜单
-      currentSubMenus: '', // 二级菜单当前id,也是激活的菜单
+      currentSubMenus: this.activeTableName || '', // 二级菜单当前id,也是激活的菜单
       visibleMenus: true, // 菜单是否可见
       defaultOpens: [], // 默认展开的子菜单
       menuList: this.parentMenuList
@@ -75,17 +75,17 @@ export default {
       if (index !== undefined) {
         this.initMenuData(index);
         const mainMenuData = this.mainMenus[index];
-        this.menuEvent(mainMenuData);
+        this.subMenuEvent(mainMenuData);
       }
     },
     // 子菜单的切换
-    menuEvent(data) {
+    subMenuEvent(data) {
       const { name, path, id } = data;
       const routerType = isHttpStart(path) ? 2 : 1;
       if (path) { // 有路径，展开新的页面
         let component = firstUpercase(path.split('-')[1]);
         const data = {
-          id,
+          name: id,
           title: name,
           component,
           routerType,
@@ -109,7 +109,7 @@ export default {
         this.currentSubMenus = childId;
       }
       if (result.length > 0 && this.subMenus.length < 1) {
-        this.menuEvent(this.mainMenus[0]);
+        this.subMenuEvent(this.mainMenus[0]);
       }
     },
     // 根据路径处理返回路径
@@ -117,14 +117,7 @@ export default {
       return isHttpStart(path) ? path : `#${path}`;
     },
     // 子菜单点击
-    menuOpen(id) {
-      if (id === this.currentSubMenus) {
-        this._initMenu(id);
-      }
-      this.currentSubMenus = id;
-    },
-    // 子菜单选中
-    menuSelect(id) {
+    menuEvent(id) {
       if (id === this.currentSubMenus) {
         this._initMenu(id);
       }
@@ -136,7 +129,7 @@ export default {
         return data.id === id;
       });
       if (data && data.length > 0) {
-        this.menuEvent(data[0] || {});
+        this.subMenuEvent(data[0] || {});
       }
     }
   },
@@ -148,6 +141,9 @@ export default {
     // 根据当前子菜单id获取子菜单数据
     currentSubMenus(id) {
       this._initMenu(id);
+    },
+    activeTableName(cur) {
+      this.currentSubMenus = cur;
     }
   }
 };

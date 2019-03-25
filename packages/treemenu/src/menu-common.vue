@@ -6,8 +6,7 @@
                   :index="list.id" :key="index">
         <template slot="title">
           <span slot="title">
-
-            {{ list.name}}
+            {{ list.name}}{{list.id}}
           </span>
         </template>
         <Menu :menuList="list.children" :activeMenuId="activeMenuId"></Menu>
@@ -15,8 +14,7 @@
       <el-menu-item v-else :index="list.id" :key="index"
                     :data-menu_current="activeMenuId===list.id">
         <span>
-
-          {{list.name}}
+          {{list.name}}{{list.id}}
         </span>
       </el-menu-item>
     </template>
@@ -49,10 +47,3 @@ export default {
   }
 };
 </script>
-
-<style scoped lang="scss">
-  .menu-icon{
-    vertical-align: sub;
-    width: 18px;
-  }
-</style>

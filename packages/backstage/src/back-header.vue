@@ -34,16 +34,7 @@ export default {
   },
   methods: {
     dropdownCommand(command) {
-      if (command === 'signOut') {
-        localStorage.clear();
-        this.$router.replace({
-          path: '/login'
-        });
-      } else {
-        this.$router.replace({
-          path: `/${command}?id=${this.user.id}`
-        });
-      }
+      this.$emit('headerCommand', command);
     },
     initUser() {
       const user = localStorage.getItem('userInfo');
