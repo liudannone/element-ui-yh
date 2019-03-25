@@ -1,10 +1,11 @@
 <template>
   <div class="body-wrap">
-    <BackHeader class="header-wrap"></BackHeader>
+    <BackHeader class="header-wrap" :logo="logo" :title="title"></BackHeader>
     <el-container class="main-wrap">
-      <el-treemenu :parentMenuList="menuList"></el-treemenu>
+      <el-treemenu :parentMenuList="menuList" @addTab="addTab"
+                   :activeTableName="activeTableName" @getActiveTableName="getActiveTableName"></el-treemenu>
       <el-container class="relative">
-        <el-tabs class="tabs-wrap" :value ="activeTableName" type="card"
+       <!-- <el-tabs class="tabs-wrap" :value ="activeTableName" type="card"
                  closable @tab-remove="removeTab">
           <el-tab-pane
             v-for="item in tabs"
@@ -14,7 +15,7 @@
             <iframe class="iframe" :src="item.path"
                     frameborder="0"></iframe>
           </el-tab-pane>
-        </el-tabs>
+        </el-tabs>-->
       </el-container>
     </el-container>
   </div>
@@ -28,35 +29,57 @@ export default {
   components: {
     BackHeader
   },
+  props: {
+    logo: String,
+    title: String,
+    menuList: Array
+  },
   data() {
     return {
-      menuList: [] // 菜单列表
+      activeTableName: '',
+      tabs: [],
+      tabIndex: 0
     };
-  },
-  created() {
-    this.getMenus();
-  },
-  mounted() {
-
-  },
-  computed: {
-    /* tabs() {
-      return this.$store.getters.tabs;
-    },
-    activeTableName() {
-      return this.$store.getters.activeTableName;
-    },
-    isLogin() {
-      return this.$store.getters.isLogin;
-    }*/
   },
   methods: {
     // 删除菜单
-    removeTab(name) {
-      this.$store.dispatch('removeTab', name);
+    removeTab(targetName) {
+      const tabs = this.tabs;
+      let activeTableName = this.activeTableName;
+      if (activeTableName === targetName) {
+        tabs.forEach((tab, index) => {
+          if (tab.name === targetName) {
+            const nextTab = tabs[index + 1] || tabs[index - 1];
+            if (nextTab) {
+              this.activeTableName = nextTab.name;
+            }
+          }
+        });
+      }
+      this.tabs = tabs.filter(tab => tab.name !== targetName);
     },
-    // 获取菜单
-    getMenus() {
+    // 子组件中获取增加菜单弹窗
+    addTab(data) {
+      let newTabName = ++this.tabIndex + ''; // eslint-disable-line
+      let flag = true;
+      const tabs = this.tabs;
+      tabs.forEach((tab) => {
+        if (tab.id === data.id) {
+          flag = false;
+          newTabName = tab.name;
+        }
+      });
+      if (flag) {
+        this.tabs.push({
+          ...data,
+          name: newTabName
+        });
+      }
+      this.activeTableName = newTabName;
+    },
+    // 子组件中获取激活菜单的名称
+    getActiveTableName(targetName) {
+      this.activeTableName = targetName;
     }
   }
 };

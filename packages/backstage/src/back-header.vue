@@ -1,10 +1,10 @@
 <template>
   <!--头部横条公用组件-->
   <div class="header">
-    <!--<img src="../assets/ywLogo.png" alt="logo">-->
+    <img :src="logo" alt="logo">
     <el-dropdown class="drop-down" @command="dropdownCommand">
       <span class="user-info">
-        你好,{{user.name}}欢迎使用运维系统！
+        你好,{{user.name}}欢迎使用{{title}}！
        <!-- <img class="user-header" src="../assets/defaultUserHead.png" alt="header-img">-->
         <i class="el-icon-arrow-down el-icon--right"></i>
       </span>
@@ -20,6 +20,10 @@
 <script type="text/ecmascript-6">
 export default {
   name: 'back-header',
+  props: {
+    logo: String,
+    title: String
+  },
   data() {
     return {
       user: {}
@@ -31,7 +35,10 @@ export default {
   methods: {
     dropdownCommand(command) {
       if (command === 'signOut') {
-
+        localStorage.clear();
+        this.$router.replace({
+          path: '/login'
+        });
       } else {
         this.$router.replace({
           path: `/${command}?id=${this.user.id}`
@@ -51,7 +58,7 @@ export default {
 <style lang="scss">
 .header{
   height: 70px;
-  /*background: url("../assets/bgHeader.png") no-repeat center center/cover;*/
+  background-color: #1d2531;
   display: flex;
   position: relative;
   align-items: center;

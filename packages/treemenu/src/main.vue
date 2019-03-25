@@ -47,7 +47,8 @@ import { isHttpStart, firstUpercase, filterData } from 'element-ui-yh/src/extend
 export default {
   name: 'ElTreemenu',
   props: {
-    parentMenuList: Array
+    parentMenuList: Array,
+    activeTableName: String
   },
   data() {
     return {
@@ -57,121 +58,11 @@ export default {
       currentSubMenus: '', // 二级菜单当前id,也是激活的菜单
       visibleMenus: true, // 菜单是否可见
       defaultOpens: [], // 默认展开的子菜单
-      // menuList: this.parentMenuList,
-      /* eslint-disable */
-      menuList: [
-        {
-          "id": "1",
-          "systemCode": "0001",
-          "path": "",
-          "name": "权限管理",
-          "pinyin": "",
-          "picture": "/image/icon/icon_002.png",
-          "describe": "系统分组管理",
-          "state": 1,
-          "createTime": "2018-12-25T07:18:21.000+0000",
-          "updateTime": "2018-12-25T07:18:18.000+0000",
-          "type": 2,
-          "resource": null,
-          "parentId": "",
-          "mLevel": 1,
-          "order": 1
-        },
-        {
-          "id": "3",
-          "systemCode": "0001",
-          "path": "",
-          "name": "注册管理",
-          "pinyin": "",
-          "picture": "/image/icon/icon_002.png",
-          "describe": "系统分组管理",
-          "state": 1,
-          "createTime": "2018-12-25T07:18:21.000+0000",
-          "updateTime": "2018-12-25T07:18:18.000+0000",
-          "type": 2,
-          "resource": null,
-          "parentId": "",
-          "mLevel": 1,
-          "order": 2
-        },
-        {
-          id: "12",
-          systemCode: "0001",
-          parentId: "1",
-          path: '/jurisdiction-Business',
-          name: '系统管理',
-          order: 1,
-        },
-        {
-          id: "13",
-          systemCode: "0001",
-          parentId: "1",
-          path: '/jurisdiction-resource',
-          name: '系统资源',
-          order: 1,
-        },
-        {
-          id: "14",
-          systemCode: "0001",
-          parentId: "1",
-          path: '/jurisdiction-role',
-          name: '角色权限',
-          order: 1,
-        },
-        {
-          id: "16",
-          systemCode: "0001",
-          parentId: "1",
-          path: '/jurisdiction-user',
-          name: '系统用户',
-          order: 1,
-        },
-        {
-          id: "17",
-          systemCode: "0001",
-          parentId: "1",
-          path: '/jurisdiction-group',
-          name: '用户分组管理',
-          order: 0,
-        },
-        {
-          id: "22",
-          systemCode: "0001",
-          parentId: "3",
-          path: '/service-mechanism',
-          name: '机构管理',
-          order: 1,
-        },
-        {
-          id: "21",
-          systemCode: "0001",
-          parentId: "3",
-          path: '/service-department',
-          name: '科室管理',
-          order: 1,
-        },
-        {
-          id: "23",
-          systemCode: "0001",
-          parentId: "3",
-          path: '/service-people',
-          name: '人员管理',
-          order: 1,
-        },
-        {
-          id: "24",
-          systemCode: "0001",
-          parentId: "3",
-          path: '/service-equipment',
-          name: '设备管理',
-          order: 1,
-        },
-      ], // 菜单的数据
-      /* eslint-disable */
+      menuList: this.parentMenuList
     };
   },
   components: {
-    MenuCommon,
+    MenuCommon
   },
   created() {
     this.initMenuData();
@@ -187,23 +78,24 @@ export default {
         this.menuEvent(mainMenuData);
       }
     },
-    // 菜单的切换
+    // 子菜单的切换
     menuEvent(data) {
       const { name, path, id } = data;
       const routerType = isHttpStart(path) ? 2 : 1;
       if (path) { // 有路径，展开新的页面
         let component = firstUpercase(path.split('-')[1]);
-        this.addTab({
+        const data = {
           id,
           title: name,
           component,
           routerType,
-          path: this.getPath(path),
-        });
+          path: this.getPath(path)
+        };
+        this.$emit('addTab', data);
       }
     },
     // 菜单数据的放置,主菜单的index
-    initMenuData(index=0) {
+    initMenuData(index = 0) {
       let result = this.mainMenus;
       if (!this.mainMenus || this.mainMenus.length < 1) {
         result = filterData(this.menuList);
@@ -216,7 +108,7 @@ export default {
         this.subMenus = resChild;
         this.currentSubMenus = childId;
       }
-      if (result.length > 0 && this.subMenus.length < 1){
+      if (result.length > 0 && this.subMenus.length < 1) {
         this.menuEvent(this.mainMenus[0]);
       }
     },
@@ -238,14 +130,6 @@ export default {
       }
       this.currentSubMenus = id;
     },
-    // 添加路由
-    addTab(data) {
-      this.$store.dispatch('addTab', data);
-    },
-    // 激活菜单
-    activeTab(name) {
-      this.$store.dispatch('activeTableName', name);
-    },
     // 根据id变化初始化菜单
     _initMenu(id) {
       const data = this.menuList.filter((data) => {
@@ -262,7 +146,7 @@ export default {
       this.initMenuData();
     },
     // 根据当前子菜单id获取子菜单数据
-    currentSubMenus(id){
+    currentSubMenus(id) {
       this._initMenu(id);
     }
   }
