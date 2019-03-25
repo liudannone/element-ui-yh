@@ -13,9 +13,8 @@
             :key="item.name"
             :label="item.title"
             :name="item.name">
-            {{item.name}}
-           <!-- <iframe class="iframe" :src="item.path"
-                    frameborder="0"></iframe>-->
+            <iframe class="iframe" :src="item.path"
+                    frameborder="0"></iframe>
           </el-tab-pane>
         </el-tabs>
       </el-container>
