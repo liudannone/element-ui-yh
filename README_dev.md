@@ -21,7 +21,7 @@ npm run dev:play // 组件开发模式
 - 源码修改和扩展
     1、packages下新建要扩展的模块
     2、src下index.js中新增路由
-
+    3、样式文件都在packages/theme-chalk下，通过index.scss向外全局引用
 - 打包
 ```npm
 npm run dist

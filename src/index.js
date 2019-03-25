@@ -147,6 +147,7 @@ const components = [
   Treemenu
 ];
 
+
 const install = function(Vue, opts = {}) {
   locale.use(opts.locale);
   locale.i18n(opts.i18n);
@@ -156,7 +157,7 @@ const install = function(Vue, opts = {}) {
   });
 
   Vue.use(Loading.directive);
-
+  
   Vue.prototype.$ELEMENT = {
     size: opts.size || '',
     zIndex: opts.zIndex || 2000

@@ -1,0 +1,104 @@
+@import "common/var";
+
+::-webkit-scrollbar{
+  width: 1px;
+}
+/*菜单结构start*/
+.menu-wrap{
+  height:calc(100vh - 70px);
+  position: relative;
+  overflow:hidden;
+  display: inline-block;
+  &.hide-menu{
+    .main-menu{
+      width: 0;
+      overflow: hidden;
+    }
+    .sub-menu{
+      width: 0;
+      overflow: hidden;
+    }
+    .fold-icon{
+      position: fixed;
+      left: 1px;
+      right: inherit;
+      z-index: 999;
+    }
+  }
+  .main-menu{
+    height: 100%;
+    width: 100px;
+    box-sizing: border-box;
+    padding: 30px 0;
+    float: left;
+    background-color: #1d2531;
+    transition:all 0.1s;
+    overflow: auto;
+  }
+  .sub-menu{
+    height: 100%;
+    width: 220px;
+    float: left;
+    transition:all 0.1s;
+    background-color: #fff;
+    border-right:1px solid $--border-color-base;
+    overflow: auto;
+  }
+  .fold-icon{
+    position: absolute;
+    right: 0;
+    padding: 3px;
+    top:48%;
+    background-color: #f8f8f8;
+    color: $--color-primary;
+    text-decoration: none;
+    &:hover,&:active,&.current{
+      color: #fff;
+      background-color:$--color-primary-light-4;
+    }
+  }
+}
+/*菜单结构end*/
+/*主菜单start*/
+.main-menu-item{
+  color: #b7c0cd;
+  margin-bottom: 30px;
+  text-align: center;
+  cursor:pointer;
+  &:hover,&.current{
+    color:#fff;
+    .icon-menu{
+      .img-menu-hover{
+        opacity: 1;
+      }
+    }
+  }
+  .icon-menu{
+    position: relative;
+    display: inline-block;
+    /*background: url("../assets/menu.png") no-repeat center center/60px;*/
+    text-align: center;
+    margin-bottom: 20px;
+    .img-menu{
+      width: 60px;
+    }
+    .img-menu-hover{
+      width: 90px;
+      position: absolute;
+      left: 50%;
+      top:50%;
+      transform: translate(-50%,-50%);
+      opacity: 0;
+      transition: all 0.2s;
+    }
+  }
+}
+/*主菜单end*/
+/*子菜单start*/
+.sub-menu-title{
+  padding: 15px;
+  font-weight: 700;
+  font-size: 16px;
+  border-bottom: 1px solid $--border-color-base;
+}
+/*子菜单end*/

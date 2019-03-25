@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-treemenu></el-treemenu>
+    <el-treemenu :menuList="menuList" :activeMenuId="activeMenuId"></el-treemenu>
   </div>
 </template>
 
@@ -8,7 +8,8 @@
   export default {
     data() {
       return {
-
+        activeMenuId: '',
+        menuList: [],
       };
     }
   };
