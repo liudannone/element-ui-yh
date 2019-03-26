@@ -6,7 +6,7 @@
                   :index="list.id" :key="index">
         <template slot="title">
           <span slot="title">
-            {{ list.name}}{{list.id}}
+            {{ list.name}}
           </span>
         </template>
         <Menu :menuList="list.children" :activeMenuId="activeMenuId"></Menu>
@@ -14,7 +14,7 @@
       <el-menu-item v-else :index="list.id" :key="index"
                     :data-menu_current="activeMenuId===list.id">
         <span>
-          {{list.name}}{{list.id}}
+          {{list.name}}
         </span>
       </el-menu-item>
     </template>

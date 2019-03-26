@@ -1,7 +1,7 @@
 <template>
   <!--头部横条公用组件-->
   <div class="header">
-    <img :src="headerLogo" alt="logo">
+    <img v-if="headerLogo" :src="headerLogo" alt="logo">
     <el-dropdown class="drop-down" @command="dropdownCommand">
       <span class="user-info">
         你好,{{user.name}}欢迎使用{{headerSysName}}！
